@@ -6,6 +6,9 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import numpy as np
 import wfdb
 
+import sys
+srcpath = os.path.abspath('../../')
+sys.path.append(srcpath)
 from src.infra.preprocessing import preprocess_recording
 
 # https://physionet.org/physiobank/database/apnea-ecg/

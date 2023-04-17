@@ -3,3 +3,15 @@
 *.ipr
 *.iml
 *.iws
+
+__pycache__
+study.py
+study.ipynb
+*.pyc 
+*.pt
+*.pkl
+*.npy
+
+seg/
+info/
+resources/*
