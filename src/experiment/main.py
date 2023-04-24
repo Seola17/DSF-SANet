@@ -1,11 +1,12 @@
 import numpy as np
 
+import sys
+sys.path.append('C:/Users/user/Desktop/Sleep_Apnea/DSF/DSF-SANet/')
 from src.experiment.preprocess import preprocess_apnea_ecg_database, load_apnea_ecg_database_preprocessed_data
 from src.experiment.evaluation import final_test
 from src.experiment.training import train_classifier
 from src.experiment.util import make_log_dir
 from src.experiment.util import setup_gpu
-from src.visualization.vis import vis_feature
 
 selected_gpu_devices = '1'
 

@@ -3,3 +3,8 @@
 *.ipr
 *.iml
 *.iws
+
+/resources/apnea-ecg-database-1.0.0/*
+/output/log/*
+*.pkl
+*.pyc

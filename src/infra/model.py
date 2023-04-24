@@ -2,7 +2,6 @@ import math
 
 import keras
 import tensorflow as tf
-import tensorflow_addons as tfa
 from keras import backend as K
 from keras import layers
 from keras.layers import Dense
@@ -14,13 +13,23 @@ from tensorflow.keras.layers import *
 
 def inorm_cnn_module(extended_segment_RRI_RPA):
     conv1 = keras.layers.Conv1D(filters=64, kernel_size=11, strides=1, padding='same')(extended_segment_RRI_RPA)
-    conv1 = tfa.layers.InstanceNormalization()(conv1)
+    
+    # conv1 = tfa.layers.InstanceNormalization()(conv1)
+    conv1 = keras.layers.BatchNormalization(axis=1)(conv1)
+    """
+    Instance normalization can be implemented using Batch Normalization.
+    https://stackoverflow.com/questions/68088889/how-to-add-instancenormalization-on-tensorflow-keras
+    """
+
     conv1 = keras.layers.Activation('relu')(conv1)
     conv1 = keras.layers.Dropout(rate=0.2)(conv1)
     conv1 = keras.layers.MaxPooling1D(pool_size=5)(conv1)
 
     conv2 = keras.layers.Conv1D(filters=64, kernel_size=11, strides=1, padding='same')(conv1)
-    conv2 = tfa.layers.InstanceNormalization()(conv2)
+    
+    # conv2 = tfa.layers.InstanceNormalization()(conv2)
+    conv2 = keras.layers.BatchNormalization(axis=1)(conv2)
+
     conv2 = keras.layers.Activation('relu')(conv2)
     conv2 = keras.layers.Dropout(rate=0.2)(conv2)
     return conv2
