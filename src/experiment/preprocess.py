@@ -18,11 +18,11 @@ data_dir = Path('../../resources/kangwon_hospital/')
 # number of threads to preprocess recording
 threads = os.cpu_count()
 threads = 61 # maximum num_workers on Windows
-
-released_set_recording_names = [
-    name.split('.')[0] for name in os.listdir(data_dir)
-    if name.endswith('.npy')
-]
+released_set_recording_names = ['0001']
+# released_set_recording_names = [
+#     name.split('.')[0] for name in os.listdir(data_dir)
+#     if name.endswith('.npy')
+# ]
 released_set_recording_names.sort()
 
 random.seed(42)
@@ -74,7 +74,11 @@ def preprocess_apnea_ecg_database():
     """
         preprocess Kangwon Univ ECG data
     """
-    if os.path.exists('../../output/preprocessed/kangwon-apnea-ecg.pkl'):
+    # if os.path.exists('../../output/preprocessed/kangwon-apnea-ecg.pkl'):
+    #     return
+
+    if os.path.exists('../../output/preprocessed/apnea-ecg-physionet.pkl'):
+        print('yes')
         return
 
     o_train, o_train_5, y_train, groups_train = preprocess_released_set(training_set_recording_names)
@@ -93,7 +97,10 @@ def preprocess_apnea_ecg_database():
 def load_apnea_ecg_database_preprocessed_data():
     print('start: loading Apnea-ECG preprocessed data')
 
-    with open('../../output/preprocessed/kangwon-apnea-ecg.pkl', 'rb') as f:
+    # with open('../../output/preprocessed/kangwon-apnea-ecg.pkl', 'rb') as f:
+    #     apnea_ecg = pickle.load(f)
+
+    with open('../../output/preprocessed/apnea-ecg-physionet.pkl', 'rb') as f:
         apnea_ecg = pickle.load(f)
     x_train, x_train_5min, y_train, groups_train = apnea_ecg["o_train"], apnea_ecg["o_train_5"], apnea_ecg["y_train"], \
                                                    apnea_ecg["groups_train"]
